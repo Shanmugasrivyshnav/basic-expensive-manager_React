@@ -12,8 +12,8 @@ const MoneyDetails = (props) => {
           alt="balance"
         />
         <div>
-          <p>Your Balance</p>
-          <p data-testid="balanceAmount">₹ {balance}</p>
+          <p>Your Balance:</p>
+          <p data-testid="balanceAmount">₹:{balance}</p>
         </div>
       </div>
 
