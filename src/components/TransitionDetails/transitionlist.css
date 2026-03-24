@@ -1,0 +1,43 @@
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.transaction-item:hover {
+  background-color: #f1f5f9;
+}
+
+/* Delete button animation */
+.transaction-item button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.transaction-item button:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
+.transaction-item button:active {
+  transform: scale(0.9);
+}
+
+.transaction-item img {
+  width: 20px;
+}
+
+/* Fade-out animation (for delete) */
+.fade-out {
+  animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+}
