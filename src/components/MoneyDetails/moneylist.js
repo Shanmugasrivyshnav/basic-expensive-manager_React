@@ -20,6 +20,7 @@ const MoneyDetails = (props) => {
       {/* INCOME */}
       <div>
         <img
+          className="income-img"
           src="https://assets.ccbp.in/frontend/react-js/money-manager/income-image.png"
           alt="income"
         />
