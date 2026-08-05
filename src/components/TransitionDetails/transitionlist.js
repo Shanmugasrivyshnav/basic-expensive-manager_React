@@ -2,7 +2,7 @@ import "./transitionlist.css";
 
 const TransactionItem = (props) => {
   const { details, deleteTransaction } = props;
-  const { id, title, amount, type } = details;
+  const { id, title, amount, type, expenseStatus } = details;
 
   const onDelete = () => {
     deleteTransaction(id);
@@ -15,6 +15,7 @@ const TransactionItem = (props) => {
       <p>{title}</p>
       <p>₹ {amount}</p>
       <p>{displayType}</p>
+      <p>{expenseStatus}</p>
 
       <button type="button" data-testid="delete" onClick={onDelete}>
         <img

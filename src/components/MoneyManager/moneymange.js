@@ -15,6 +15,7 @@ const transactionTypeOptions = [
 
 class MoneyManager extends Component {
   state = {
+    userName: this.props.user.userName,
     titleInput: "",
     amountInput: "",
     typeInput: transactionTypeOptions[0].optionId,
@@ -33,17 +34,34 @@ class MoneyManager extends Component {
     this.setState({ typeInput: e.target.value });
   };
 
+  onUsername = (e) => {
+    this.setState({
+      userName: e.target.value,
+    });
+  };
+
   addTransaction = (e) => {
     e.preventDefault();
     const { titleInput, amountInput, typeInput } = this.state;
+    const amount = parseInt(amountInput);
+
+    let expenseStatus = "";
+    if (amount <= Number(this.props.user.lowAmount)) {
+      expenseStatus = "Low";
+    } else if (amount <= Number(this.props.user.averageAmount)) {
+      expenseStatus = "Average";
+    } else {
+      expenseStatus = "High";
+    }
 
     if (titleInput === "" || amountInput === "") return;
 
     const newTransaction = {
       id: uuidv4(),
       title: titleInput,
-      amount: parseInt(amountInput),
+      amount,
       type: typeInput,
+      expenseStatus,
     };
 
     this.setState((prevState) => ({
@@ -77,7 +95,8 @@ class MoneyManager extends Component {
   };
 
   render() {
-    const { titleInput, amountInput, typeInput, transactionsList } = this.state;
+    const { userName, titleInput, amountInput, typeInput, transactionsList } =
+      this.state;
 
     const income = this.getIncome();
     const expenses = this.getExpenses();
@@ -86,7 +105,7 @@ class MoneyManager extends Component {
     return (
       <div className="app-container">
         <div className="money-manager-container">
-          <h1>Hi, Richard</h1>
+          <h1>Hi, {userName} 👋</h1>
           <p>Welcome back to your Money Manager</p>
 
           <MoneyDetails income={income} expenses={expenses} balance={balance} />
@@ -134,7 +153,7 @@ class MoneyManager extends Component {
                   <p>Title</p>
                   <p>Amount</p>
                   <p>Type</p>
-                  <p> </p>
+                  <p></p>
                 </li>
 
                 {transactionsList.map((each) => (
